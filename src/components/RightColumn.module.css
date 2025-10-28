@@ -1,0 +1,171 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nowPlayingHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.stepMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.stepName {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.stepReason {
+  margin: 0;
+  color: var(--text-dim);
+}
+
+.invariantList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.invariantTitle {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.invariantItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: var(--bg-panel-alt);
+}
+
+.statusOk {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #2bb673;
+}
+
+.statusWarn {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #f59e0b;
+}
+
+.muted {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.stepList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stepItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid transparent;
+  border-left: 4px solid transparent;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: var(--bg-panel-alt);
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+
+.stepItem:hover {
+  transform: translateY(-1px);
+  border-color: rgba(67, 97, 238, 0.25);
+}
+
+.stepItemActive {
+  border-left-color: var(--accent);
+  background: var(--bg-accent-soft);
+}
+
+.stepAction {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.stepAction strong {
+  color: var(--text-main);
+}
+
+.stepDescription {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.codeWrapper {
+  border-radius: 14px;
+  border: 1px solid var(--border-default);
+  background: var(--bg-panel-alt);
+  padding: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.codeLine {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border-radius: 8px;
+}
+
+.codeLine:not(.highlightLine) {
+  padding: 4px 8px 4px 12px;
+}
+
+.codeLineNumber {
+  width: 28px;
+  color: var(--text-dim);
+}
+
+.codeText {
+  flex: 1;
+  color: var(--text-main);
+}
+
+.inspectorEmpty {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.liveRegion {
+  display: none;
+}

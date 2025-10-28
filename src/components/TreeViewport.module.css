@@ -1,0 +1,263 @@
+.viewport {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(239, 241, 248, 0.92));
+  border: 1px solid var(--border-default);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.viewport::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at top, rgba(67, 97, 238, 0.12), transparent 65%),
+    linear-gradient(rgba(31, 36, 50, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 36, 50, 0.04) 1px, transparent 1px);
+  background-size: auto, 60px 60px, 60px 60px;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.svg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(67, 97, 238, 0.18);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 18px 32px rgba(31, 36, 50, 0.08);
+  pointer-events: none;
+}
+
+.overlayTitle {
+  font-weight: 600;
+  margin: 0;
+}
+
+.overlayMeta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.overlayMeta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.node {
+  cursor: pointer;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: filter 160ms ease;
+}
+
+.node:focus-visible circle {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.nodeLabel {
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.orderBadge {
+  pointer-events: none;
+}
+
+.orderBadge rect {
+  fill: rgba(67, 97, 238, 0.16);
+  stroke: var(--accent);
+  stroke-width: 1;
+  rx: 10px;
+  ry: 10px;
+}
+
+.orderBadge text {
+  fill: var(--text-accent);
+  font-size: 0.6rem;
+  font-weight: 600;
+}
+
+.edgeActive {
+  animation: edgePulse 1.4s ease-in-out infinite alternate;
+}
+
+.nodeEnter {
+  animation: nodeEnter 420ms cubic-bezier(0.23, 1.16, 0.42, 1) both;
+}
+
+.nodePulse {
+  animation: nodePulse 520ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nodeTraverse {
+  animation: nodeTraverse 560ms ease-out;
+}
+
+.nodeSwap {
+  animation: nodeSwap 640ms ease-in-out;
+}
+
+.nodeFade {
+  animation: nodeFade 460ms ease-in forwards;
+}
+
+.nodeQueue {
+  animation: nodeQueue 620ms cubic-bezier(0.36, 0, 0.66, -0.56);
+}
+
+.edgeTraverse {
+  stroke-dasharray: 6 10;
+  animation: edgeTraverse 540ms ease-out;
+}
+
+.edgeGrow {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: edgeGrow 520ms ease-out forwards;
+}
+
+.edgeSwap {
+  animation: edgeSwap 720ms ease-in-out;
+}
+
+@keyframes edgePulse {
+  from {
+    stroke-width: 3.2px;
+  }
+  to {
+    stroke-width: 3.8px;
+  }
+}
+
+@keyframes nodeEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes nodePulse {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes nodeTraverse {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(67, 97, 238, 0));
+  }
+  40% {
+    transform: scale(1.04) translateY(-4px);
+    filter: drop-shadow(0 6px 14px rgba(67, 97, 238, 0.28));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(67, 97, 238, 0));
+  }
+}
+
+@keyframes nodeSwap {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  35% {
+    transform: scale(1.05) rotate(-3deg);
+  }
+  65% {
+    transform: scale(1.05) rotate(3deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes nodeFade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.2;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes nodeQueue {
+  0% {
+    transform: scale(1);
+  }
+  55% {
+    transform: scale(0.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes edgeTraverse {
+  0% {
+    stroke-dashoffset: 18;
+    stroke-width: 3px;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke-width: 3.7px;
+  }
+}
+
+@keyframes edgeGrow {
+  0% {
+    stroke-dashoffset: 120;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes edgeSwap {
+  0% {
+    stroke: var(--accent);
+  }
+  50% {
+    stroke: #ff9f1c;
+  }
+  100% {
+    stroke: var(--accent);
+  }
+}
