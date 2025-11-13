@@ -178,7 +178,12 @@ export function remove(tree: TreeState, key: number | string): RemoveResult {
           reason: `Successor ${successorNode.key} selected to replace ${targetNode.key}.`,
           tree: nextState,
           codeLines: [DELETE_LINE.TWO_CHILDREN, DELETE_LINE.TRANSPLANT],
-          highlights: { nodes: [targetId, successorId], edges: [[successorNode.parent!, successorId]] },
+          highlights: { 
+            nodes: [targetId, successorId], 
+            edges: successorNode.parent && successorNode.parent !== targetId 
+              ? [[successorNode.parent, successorId]] 
+              : undefined 
+          },
         }),
       );
 

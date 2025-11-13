@@ -389,6 +389,8 @@ button:disabled {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  height: 120px;
+  justify-content: space-between;
 }
 
 .badge {

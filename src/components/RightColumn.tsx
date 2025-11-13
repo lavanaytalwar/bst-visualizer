@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useVisualizerStore, useCurrentStep, useVisualizedTree } from '../state/visualizerStore';
 import { getDepth, getHeight, getPredecessor, getSubtreeSize, getSuccessor } from '../utils/metrics';
 import { PSEUDOCODE, blockForStep } from '../data/pseudocode';
+import { StepBox } from './StepBox';
 import styles from './RightColumn.module.css';
 
 interface RightColumnProps {
@@ -67,22 +68,7 @@ export const RightColumn: React.FC<RightColumnProps> = ({ onOpenPseudocode }) =>
 
         {currentStep ? (
           <>
-            <div className="currentStepCard">
-              <div className={styles.nowPlayingHeader}>
-                <p className={styles.stepName}>{currentStep.action}</p>
-                <div className={styles.stepMeta}>
-                  {currentStep.op && <span>{currentStep.op.toUpperCase()}</span>}
-                  {currentStep.codeLines && currentStep.codeLines.length > 0 && (
-                    <span>
-                      {currentStep.codeLines.length === 1
-                        ? `Line ${currentStep.codeLines[0]}`
-                        : `Lines ${currentStep.codeLines.join(', ')}`}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <p className={styles.stepReason}>{currentStep.reason}</p>
-            </div>
+            <StepBox step={currentStep} isCurrent={true} />
 
             <div className={styles.invariantList}>
               <span className={styles.invariantTitle}>Invariant checks</span>
@@ -118,24 +104,11 @@ export const RightColumn: React.FC<RightColumnProps> = ({ onOpenPseudocode }) =>
             const active = index === currentStepIndex;
             return (
               <li key={step.id}>
-                <button
-                  type="button"
-                  className={`${styles.stepItem} focusRing ${active ? styles.stepItemActive : ''}`}
-                  onClick={() => handleSelectStep(index)}
-                  aria-pressed={active}
-                >
-                  <div className={styles.stepAction}>
-                    <strong>{step.action}</strong>
-                    {step.codeLines && step.codeLines.length > 0 && (
-                      <span>
-                        {step.codeLines.length === 1
-                          ? `Line ${step.codeLines[0]}`
-                          : `Lines ${step.codeLines.join(', ')}`}
-                      </span>
-                    )}
-                  </div>
-                  <p className={styles.stepDescription}>{step.reason}</p>
-                </button>
+                <StepBox 
+                  step={step} 
+                  isActive={active} 
+                  onClick={() => handleSelectStep(index)} 
+                />
               </li>
             );
           })}
@@ -151,7 +124,8 @@ export const RightColumn: React.FC<RightColumnProps> = ({ onOpenPseudocode }) =>
             <h2 id="algorithm-heading">Algorithm</h2>
             <span>Active pseudocode lines update with the timeline.</span>
           </div>
-          <button type="button" className="textButton focusRing" onClick={onOpenPseudocode}>
+          {/* Button removed visually */}
+          <button type="button" className="textButton focusRing" onClick={onOpenPseudocode} hidden>
             Open full pseudocode
           </button>
         </header>
@@ -180,7 +154,7 @@ export const RightColumn: React.FC<RightColumnProps> = ({ onOpenPseudocode }) =>
         <header className="sectionHeader">
           <div className="sectionHeaderTitle">
             <h2 id="inspector-heading">Node Details</h2>
-            <span>Inspect the selected node&apos;s local metrics.</span>
+            <span>Inspect the selected node's local metrics.</span>
           </div>
         </header>
         {node && metrics ? (
